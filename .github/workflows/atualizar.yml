@@ -27,7 +27,7 @@ jobs:
         env:
           EXCEL_URL: ${{ secrets.EXCEL_URL }}
         run: |
-          curl -L --fail --silent --show-error -o planilha.xlsx "${EXCEL_URL}&download=1"
+          curl -L -s -A "Mozilla/5.0" -c cj.txt -b cj.txt --fail --show-error -o planilha.xlsx "${EXCEL_URL}&download=1"
           echo "Tamanho baixado:"; ls -la planilha.xlsx
           if [ "$(head -c 2 planilha.xlsx)" != "PK" ]; then
             echo "ERRO: o download nao e um arquivo Excel valido (provavel pagina de login/erro)."
